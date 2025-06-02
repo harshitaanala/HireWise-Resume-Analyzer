@@ -1,7 +1,7 @@
-import openai
+from openai import OpenAI
 import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def analyze_resume_with_gpt(resume, jd):
     prompt = f"""
@@ -14,10 +14,10 @@ def analyze_resume_with_gpt(resume, jd):
     3. Suggestions to improve
     Format as bullet points.
     """
-    response = openai.ChatCompletion.create(
+    response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=500,
-        temperature=0.7
+        temperature=0.7,
     )
     return response.choices[0].message.content.strip()
