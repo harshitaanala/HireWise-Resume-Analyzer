@@ -8,3 +8,4 @@ tqdm
 bcrypt
 fitz
 frontend
+tools
