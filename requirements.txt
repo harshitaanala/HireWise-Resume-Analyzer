@@ -6,3 +6,4 @@ pdfminer.six
 PyPDF2
 tqdm
 bcrypt
+fitz
