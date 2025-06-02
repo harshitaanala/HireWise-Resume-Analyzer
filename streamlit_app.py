@@ -1,21 +1,16 @@
 import streamlit as st
-from app.auth import login, signup
 from app.main import run_app
+from dotenv import load_dotenv
+import os
+import openai
+
+load_dotenv()  # Load environment variables from .env
+openai.api_key = os.getenv("OPENAI_API_KEY") 
+mongo_uri = os.getenv("MONGO_URI") 
 
 st.set_page_config(page_title="HireWise – Resume Optimizer", layout="wide")
 
-if 'authenticated' not in st.session_state:
-    st.session_state.authenticated = False
-
 st.title("📄 HireWise – AI Resume Analyzer")
 
-menu = ["Login", "Sign Up"]
-choice = st.sidebar.selectbox("Choose an option", menu)
-
-if not st.session_state.authenticated:
-    if choice == "Login":
-        login()
-    else:
-        signup()
-else:
-    run_app()
+# Directly run the main app without login/signup
+run_app()
