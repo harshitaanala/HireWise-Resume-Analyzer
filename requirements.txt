@@ -7,3 +7,4 @@ PyPDF2
 tqdm
 bcrypt
 fitz
+frontend
