@@ -14,9 +14,10 @@ def analyze_resume_with_gpt(resume, jd):
     3. Suggestions to improve
     Format as bullet points.
     """
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
-        max_tokens=500
+        max_tokens=500,
+        temperature=0.7
     )
-    return response.choices[0].message.content
+    return response.choices[0].message.content.strip()
