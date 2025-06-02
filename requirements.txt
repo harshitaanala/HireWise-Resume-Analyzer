@@ -1,4 +1,8 @@
 streamlit
+pymongo
 openai
-PyMuPDF
-python-docx
+python-dotenv
+pdfminer.six
+PyPDF2
+tqdm
+bcrypt
