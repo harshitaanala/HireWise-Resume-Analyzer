@@ -1,4 +1,7 @@
-import openai
+from openai import OpenAI
+import os
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def generate_bullets(task, jd):
     prompt = f"""
@@ -7,9 +10,11 @@ def generate_bullets(task, jd):
     Job Description: {jd}
     Give 3 variations.
     """
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=300
     )
-    return response.choices[0].message.content.strip().split("\n")
+    # Split the output by new lines and filter out empty lines
+    bullets = [line.strip() for line in response.choices[0].message.content.strip().split("\n") if line.strip()]
+    return bullets
